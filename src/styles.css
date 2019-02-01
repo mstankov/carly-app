@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+ul, ol {
+    list-style-type: none;
+    list-style: none;
+}
+
+.label-primary {
+    float: left;
+}
+
+[appHighlight] {
+    box-shadow: 0 0 1px 1px #888888;
+    transition-timing-function: linear;
+    transition: 0.2s;
+}

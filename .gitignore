@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# secret credentials file
+./api/src/secret.json
+secret.json

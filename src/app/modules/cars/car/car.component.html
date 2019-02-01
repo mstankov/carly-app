@@ -1,0 +1,8 @@
+<div appHighlight class="card">
+  <img class="card-img-top" src="{{ car.imageUrl }}" alt="Photo of {{ car.manufacturer }} {{ car.model }}" (click)="openDialog()">
+  <div class="card-body">
+    <h5 class="card-title">Manufacturer: {{ car.manufacturer }}</h5>
+    <p class="card-text">This is a {{ car.model }} card</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>

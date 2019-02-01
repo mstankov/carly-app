@@ -1,0 +1,12 @@
+[
+    {
+       "id": "1",
+       "email": "martin.stankov@accedia.com",
+       "password": "dasd"
+    },
+    {
+       "id": "2",
+       "email": "testing@testing.com",
+       "password": "dasd"
+    }
+ ]

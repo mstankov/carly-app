@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{ data.car.manufacturer }} {{ data.car.model }}</h1>
+<div mat-dialog-content>
+  <p>Selected car</p>
+  <mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ data.car.manufacturer }} {{ data.car.model }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{ data.car.imageUrl }}" alt="Photo of {{ data.car.manufacturer }} {{ data.car.model }}">
+    <mat-card-content>
+      <p>
+        <b>Top speed:</b> {{ data.car.topSpeed }}
+        <b>Doors:</b> {{ data.car.doors }}
+        <b>Year from:</b> {{ data.car.yearFrom }}
+        <b>Year to:</b> {{ data.car.yearTo }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="getData()">LIKE</button>
+  <button mat-raised-button color="primary" (click)="saveData()">SHARE</button>
+  <button mat-button (click)="onNoClick()">NO THANKS</button>
+</div>
