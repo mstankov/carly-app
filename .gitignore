@@ -41,3 +41,6 @@ Thumbs.db
 # secret credentials file
 ./api/src/secret.json
 secret.json
+
+# dev environment file
+./src/environments/environment.ts
