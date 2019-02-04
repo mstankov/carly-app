@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const CarSchema = new Schema({
-    _id: { type: Schema.Types.ObjectId, required: true, auto: true, index: true },
+    id: { type: Schema.Types.ObjectId, required: true, auto: true, index: true },
     dateAdded: { type: Date, required: false, default: Date.now() },
     manufacturer: String,
     model: String,
@@ -18,7 +18,7 @@ const CarSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-    _id: { type: Schema.Types.ObjectId, required: true, auto: true, index: true },
+    id: { type: Schema.Types.ObjectId, required: true, auto: true, index: true },
     email: String,
     password: String,
     dateAdded: { type: Date, required: false, default: Date.now() }

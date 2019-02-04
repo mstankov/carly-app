@@ -28,8 +28,8 @@ const init = () => {
 
     server.applyMiddleware({ app });
 
-    app.listen({ port: 4000 }, () => {
-        console.log(`listening to port 4000:${server.graphqlPath}`);
+    app.listen({ port: 4200 }, () => {
+        console.log(`listening to port 4200:${server.graphqlPath}`);
     });
 }
 
