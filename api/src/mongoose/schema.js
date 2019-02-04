@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

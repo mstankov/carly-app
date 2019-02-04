@@ -3,7 +3,7 @@ export type User = {
     email: string;
     password: string;
     dateAdded: Date
-}
+};
   
 export type Car = {
     id: number,
@@ -18,14 +18,14 @@ export type Car = {
     imageUrl: string,
     torque: number,
     horsePower: number
-}
+};
   
 export type Query = {
     user: User;
     car: Car;
     users: User[];
     cars: Car[];
-}
+};
   
 export type Mutation = {
     addCar: Car;
@@ -35,4 +35,4 @@ export type Mutation = {
     addUser: User;
     updateUser: User;
     deleteUser: User;
-}
+};
