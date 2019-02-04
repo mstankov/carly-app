@@ -2,7 +2,8 @@ export type User = {
     id: number;
     email: string;
     password: string;
-    dateAdded: Date
+    dateAdded: Date;
+    cars: Car[];
 };
   
 export type Car = {
