@@ -12,8 +12,9 @@ import { UserModule } from './modules/user/user.module';
 
 import AuthService from './services/auth.service';
 import AuthGuard from './services/auth-guard.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     FormsModule,
     CarsModule,
     ProfileModule,
-    UserModule
+    UserModule,
+    GraphQLModule,
+    HttpClientModule
   ],
 
   providers: [

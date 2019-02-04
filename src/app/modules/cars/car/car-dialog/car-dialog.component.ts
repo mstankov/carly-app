@@ -17,13 +17,9 @@ export class CarDialogComponent {
     public authService: AuthService
   ) {}
 
-  getData(): any {
-    const data = this.dataService.getUserData(this.authService.getCurrentUserId());
-    return data;
-  }
-  async saveData() {
-    await this.dataService.saveUserData(this.authService.getCurrentUserId());
-  }
+  getData = async () => await this.dataService.getUserData(this.authService.getCurrentUserId());
+  saveData = async () => await this.dataService.saveUserData(this.authService.getCurrentUserId());
+
   onNoClick(): void {
     this.dialogRef.close();
     this.data.car = null;

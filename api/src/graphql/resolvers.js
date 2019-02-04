@@ -22,15 +22,13 @@ export default {
     Mutation: {
         // User mutations
         addUser: async (parent, { input }) => {
-            const user = await User.create({
+            return await User.create({
                 email: input.email,
                 password: input.password
             });
-
-            return user;
         },
         updateUser: async (parent, { id, input }) => {
-            const user = await User.findOneAndUpdate(
+            return await User.findOneAndUpdate(
                 id, 
                 { 
                     $set: { 
@@ -39,17 +37,28 @@ export default {
                     }
                 }, 
                 { new: true }, 
-                (err, user) => {
+                (err, updatedUser) => {
                     if (err) throw new Error(`Error updating user with id ${id}: ${err}`);
-                    else return user;
+                    else return updatedUser;
                 }
             );
-            return user;
+        },
+        removeUser: async (parent, { id }) => {
+            const removedUser = await User.findByIdAndDelete(
+                { _id: id },
+                (err, removedUser) => {
+                    if (err) throw new Error(`Error deleting user with id ${email}: ${err}`);
+                    else if (!removedUser) throw new Error (`Error deleting user with id ${id}. User does not exist.`);
+                    else return removedUser;
+                }
+            );
+
+            return removedUser;
         },
 
         // Car mutations
         addCar: async (parent, { input }) => {
-            const user = await User.create({
+            return await Car.create({
                 manufacturer: input.manufacturer,
                 model: input.model,
                 yearFrom: input.yearFrom,
@@ -60,11 +69,9 @@ export default {
                 maxSpeed: input.maxSpeed,
                 imageUrl: input.imageUrl
             });
-
-            return user;
         },
         updateCar: async (parent, { id, input }) => {
-            const car = await Car.findOneAndUpdate(
+            return await Car.findByIdAndUpdate(
                 id,
                 { 
                     $set: {
@@ -85,9 +92,16 @@ export default {
                     else return car;
                 }
             );
-
-            return car;
         },
+        removeCar: async (parent, { id }) => {
+            return await Car.findByIdAndDelete(
+                id,
+                (err, removedCar) => {
+                    if (err) throw new Error(`Error deleting car with id ${id}: ${err}`);
+                    else return removedCar;
+                }
+            )
+        }
     },
 
     // custom scalar type Date's resolver as GraphQL has no Date type built in

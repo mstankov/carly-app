@@ -5,4 +5,8 @@ export default interface ICar {
     model: string;
     yearFrom: number;
     yearTo: number;
+    information: string;
+    imageUrl: string;
+    torque: number;
+    horsePower: number;
 }

@@ -12,27 +12,30 @@ export default gql(`
     type Mutation {
         addUser(input: UserInput): User
         updateUser(id: ID!, input: UserInput): User
+        removeUser(id: ID!): User
         addCar(input: CarInput): Car
         updateCar(id: ID!, input: CarInput): Car
+        removeCar(id: ID!): Car
     }
 
     scalar Date
 
     input UserInput {
-        email: String,
+        email: String
         password: String
     }
 
     input CarInput {
-        manufacturer: String,
-        model: String,
-        yearFrom: Int,
-        yearTo: Int,
-        information: String,
-        power: Int,
-        torque: Int,
-        maxSpeed: Int,
+        topSpeed: Int
+        manufacturer: String
+        doors: Int
+        model: String
+        yearFrom: Int
+        yearTo: Int
+        information: String
         imageUrl: String
+        torque: Int
+        horsePower: Int
     }
 
     type User {
@@ -44,16 +47,17 @@ export default gql(`
 
     type Car {
         id: ID
-        manufacturer: String!
-        model: String!
-        yearFrom: Int!
-        yearTo: Int!
-        information: String
-        power: Int!
-        torque: Int!
-        maxSpeed: Int!
-        imageUrl: String
         dateAdded: Date
+        topSpeed: Int
+        manufacturer: String
+        doors: Int
+        model: String
+        yearFrom: Int
+        yearTo: Int
+        information: String
+        imageUrl: String
+        torque: Int
+        horsePower: Int
     }
 
     type UserCars {

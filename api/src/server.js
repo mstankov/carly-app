@@ -25,6 +25,7 @@ const init = () => {
     });
 
     // endpoints
+    // TODO: Wire endpoints with GraphQL instead of Mongoose
     app.post('/user', (req, res) => {
         // Insert into users Collection
         var userItem = new User({
