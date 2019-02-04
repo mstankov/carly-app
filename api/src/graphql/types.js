@@ -4,7 +4,6 @@ export default gql(`
     type Query {
         user(id: ID): User
         car(id: ID): Car
-        userCars(userId: ID): UserCars
         users: [User]
         cars: [Car]
     }
@@ -43,6 +42,7 @@ export default gql(`
         email: String!
         password: String!
         dateAdded: Date
+        cars: [Car]
     }
 
     type Car {
@@ -58,12 +58,6 @@ export default gql(`
         imageUrl: String
         torque: Int
         horsePower: Int
-    }
-
-    type UserCars {
-        id: ID
-        userId: ID!
-        cars: [Car]
     }
 `);
 

@@ -18,11 +18,12 @@ const CarSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-    id: { type: Schema.Types.ObjectId, required: true, auto: true, index: true },
+    id: Schema.Types.ObjectId,
     email: String,
     password: String,
-    dateAdded: { type: Date, required: false, default: Date.now() }
+    dateAdded: { type: Date, required: false, default: Date.now() },
+    cars: [CarSchema]
 });
 
-export const User = mongoose.model('users', UserSchema);
 export const Car = mongoose.model('cars', CarSchema);
+export const User = mongoose.model('users', UserSchema);
