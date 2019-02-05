@@ -2,47 +2,21 @@ import { gql } from 'apollo-server-express';
 
 export default gql(`
     type Query {
-        user(id: ID): User
-        car(id: ID): Car
+        user(id: ID!): User
+        car(id: ID!): Car
         users: [User]
         cars: [Car]
-    }
-
-    type Mutation {
-        addUser(input: UserInput): User
-        updateUser(id: ID!, input: UserInput): User
-        removeUser(id: ID!): User
-        addCar(input: CarInput): Car
-        updateCar(id: ID!, input: CarInput): Car
-        removeCar(id: ID!): Car
+        userCars(id: ID!): [Car]
     }
 
     scalar Date
 
-    input UserInput {
-        email: String
-        password: String
-    }
-
-    input CarInput {
-        topSpeed: Int
-        manufacturer: String
-        doors: Int
-        model: String
-        yearFrom: Int
-        yearTo: Int
-        information: String
-        imageUrl: String
-        torque: Int
-        horsePower: Int
-    }
-
     type User {
         id: ID
-        email: String!
-        password: String!
+        email: String
+        password: String
         dateAdded: Date
-        cars: [Car]
+        carIds: [ID]
     }
 
     type Car {
@@ -58,6 +32,36 @@ export default gql(`
         imageUrl: String
         torque: Int
         horsePower: Int
+    }
+
+    input CarInput {
+        topSpeed: Int
+        manufacturer: String
+        doors: Int
+        model: String
+        yearFrom: Int
+        yearTo: Int
+        information: String
+        imageUrl: String
+        torque: Int
+        horsePower: Int
+    }
+
+    input UserInput {
+        email: String
+        password: String
+        carIds: [ID]
+    }
+
+    type Mutation {
+        addUser(input: UserInput!): User
+        updateUser(id: ID!, input: UserInput): User
+        removeUser(id: ID!): User
+        updateUserCars(id: ID!, carIds: [ID]!): [Car]
+
+        addCar(input: CarInput!): Car
+        updateCar(id: ID!, input: CarInput): Car
+        removeCar(id: ID!): Car
     }
 `);
 
