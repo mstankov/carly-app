@@ -2,21 +2,21 @@ import { gql } from 'apollo-server-express';
 
 export default gql(`
     type Query {
-        user(id: ID): User
-        car(id: ID): Car
+        user(id: ID!): User
+        car(id: ID!): Car
         users: [User]
         cars: [Car]
-        userCars(id: ID): [Car]
+        userCars(id: ID!): [Car]
     }
 
     scalar Date
 
     type User {
         id: ID
-        email: String!
-        password: String!
+        email: String
+        password: String
         dateAdded: Date
-        cars: [ID]
+        carIds: [ID]
     }
 
     type Car {
@@ -50,16 +50,18 @@ export default gql(`
     input UserInput {
         email: String
         password: String
+        carIds: [ID]
     }
 
     type Mutation {
-        addUser(input: UserInput): User
+        addUser(input: UserInput!): User
         updateUser(id: ID!, input: UserInput): User
         removeUser(id: ID!): User
-        addCar(input: CarInput): Car
+        updateUserCars(id: ID!, carIds: [ID]!): [Car]
+
+        addCar(input: CarInput!): Car
         updateCar(id: ID!, input: CarInput): Car
         removeCar(id: ID!): Car
-        updateUserCars(id: ID!, cars: [ID]): [Car]
     }
 `);
 

@@ -6,14 +6,14 @@ import { Kind } from 'graphql/language';
 export default {
     Query: {
         // user
-        user: async (parent, args) => await User.findById({_id: args.id}, (err, user) => user),
+        user: async (parent, args) => await User.findById({ _id: args.id }, (err, user) => user),
         users: async () => await User.find((err, res) => res),
         userCars: async (parent, args) => {
             let cars = [];
-            const carIds = await User.findById(args.id, (err, user) => user.cars);
+            const user = await User.findById({ _id: args.id }, (err, user) => user);
 
-            _.forEach(carIds, (id) => {
-                const car = Car.findById(id, (err, car) => car);
+            _.forEach(user.carIds, (id) => {
+                const car = Car.findById({ _id: id }, (err, car) => car);
                 cars.push(car);
             });
 
@@ -30,11 +30,12 @@ export default {
     },
 
     Mutation: {
-        // User mutations
+        // USER MUTATIONS
         addUser: async (parent, { input }) => {
             return await User.create({
                 email: input.email,
-                password: input.password
+                password: input.password,
+                carIds: input.carIds
             });
         },
         updateUser: async (parent, { id, input }) => {
@@ -43,7 +44,8 @@ export default {
                 { 
                     $set: { 
                         email: input.email, 
-                        password: input.password 
+                        password: input.password,
+                        carIds: input.carIds
                     }
                 }, 
                 { new: true }, 
@@ -54,35 +56,45 @@ export default {
             );
         },
         removeUser: async (parent, { id }) => {
-            const removedUser = await User.findByIdAndDelete(
+            let removedUser;
+
+            await User.findOneAndDelete(
                 { _id: id },
-                (err, removedUser) => {
+                (err, user) => {
                     if (err) throw new Error(`Error deleting user with id ${email}: ${err}`);
-                    else if (!removedUser) throw new Error (`Error deleting user with id ${id}. User does not exist.`);
-                    else return removedUser;
+                    else if (!user) throw new Error (`Error deleting user with id ${id}. User does not exist.`);
+                    else removedUser = user;
                 }
             );
 
             return removedUser;
         },
+        updateUserCars: async (parent, { id, carIds }) => {
+            let cars = [];
 
-        updateUserCars: async (parent, { id, cars }) => {
-            return await User.findByIdAndUpdate(
+            await User.findOneAndUpdate(
                 id, 
                 { 
                     $set: {
-                        cars: cars
+                        carIds: carIds
                     }
-                }, 
+                },
                 { new: true },
                 (err, updatedUser) => {
                     if (err) throw new Error(`Error updating user with id ${id}: ${err}`);
-                    else return updatedUser;
+                    else {
+                        _.forEach(updatedUser.carIds, (id) => {
+                            const car = Car.findById({ _id: id }, (err, car) => car);
+                            cars.push(car);
+                        });
+                    };
                 }
             );
+
+            return cars;
         },
 
-        // Car mutations
+        // CAR MUTATIONS
         addCar: async (parent, { input }) => {
             return await Car.create({
                 manufacturer: input.manufacturer,
@@ -92,14 +104,16 @@ export default {
                 information: input.information,
                 power: input.power,
                 torque: input.torque,
-                maxSpeed: input.maxSpeed,
-                imageUrl: input.imageUrl
+                imageUrl: input.imageUrl,
+                topSpeed: input.topSpeed,
+                doors: input.doors
             });
         },
         updateCar: async (parent, { id, input }) => {
-            return await Car.findByIdAndUpdate(
-                id,
-                { 
+            console.log(input);
+            return await Car.findOneAndUpdate(
+                { _id: id },
+                {
                     $set: {
                         manufacturer: input.manufacturer,
                         model: input.model,
@@ -108,8 +122,10 @@ export default {
                         information: input.information,
                         power: input.power,
                         torque: input.torque,
-                        maxSpeed: input.maxSpeed,
-                        imageUrl: input.imageUrl
+                        imageUrl: input.imageUrl,
+                        topSpeed: input.topSpeed,
+                        doors: input.doors,
+                        horsePower: input.horsePower
                     }
                 },
                 { new: true }, 
