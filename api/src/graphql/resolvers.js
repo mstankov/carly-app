@@ -5,18 +5,28 @@ import { Kind } from 'graphql/language';
 
 export default {
     Query: {
-        user: async (parent, args) => {
-            const users = await User.find();
-            return _.find(users, x => x._id == args.id);
-        },
+        // user
+        user: async (parent, args) => await User.findById({_id: args.id}, (err, user) => user),
         users: async () => await User.find((err, res) => res),
-        
+        userCars: async (parent, args) => {
+            let cars = [];
+            const carIds = await User.findById(args.id, (err, user) => user.cars);
 
+            _.forEach(carIds, (id) => {
+                const car = Car.findById(id, (err, car) => car);
+                cars.push(car);
+            });
+
+            return cars;
+        },
+
+        // cars
         car: async (parent, args) => {
             const cars = await Car.find();
             return _.find(cars, x => x._id == args.id);
         },
         cars: async () => await Car.find((err, res) => res)
+        
     },
 
     Mutation: {
@@ -28,8 +38,8 @@ export default {
             });
         },
         updateUser: async (parent, { id, input }) => {
-            return await User.findOneAndUpdate(
-                id, 
+            return await User.findByIdAndUpdate(
+                { _id: id }, 
                 { 
                     $set: { 
                         email: input.email, 
@@ -54,6 +64,22 @@ export default {
             );
 
             return removedUser;
+        },
+
+        updateUserCars: async (parent, { id, cars }) => {
+            return await User.findByIdAndUpdate(
+                id, 
+                { 
+                    $set: {
+                        cars: cars
+                    }
+                }, 
+                { new: true },
+                (err, updatedUser) => {
+                    if (err) throw new Error(`Error updating user with id ${id}: ${err}`);
+                    else return updatedUser;
+                }
+            );
         },
 
         // Car mutations
@@ -100,7 +126,7 @@ export default {
                     if (err) throw new Error(`Error deleting car with id ${id}: ${err}`);
                     else return removedCar;
                 }
-            )
+            );
         }
     },
 
