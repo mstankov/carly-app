@@ -1,9 +1,11 @@
 .login-form {
     box-shadow: 10px 20px 30px darkgray;
     margin-top: 15%;
+    padding: 1em 1em;
     width: 50%; 
     transition: width 0.5s;
     text-align: center;
+    border-radius: 2em;
 }
 
 @media only screen and (max-width: 600px) {
@@ -67,3 +69,6 @@
     animation: 0.5s ease-out 0s 1 slideInFromLeft, 2s ease-in-out 3s 1 slideOutFromRight forwards, 1s ease-in 6s 1 slideInFromLeftBounceBack forwards;
 }
 
+.button-register {
+    margin-top: 10px;
+}

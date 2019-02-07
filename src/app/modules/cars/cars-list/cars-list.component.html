@@ -1,3 +1,9 @@
 <div class="card-deck">
-  <app-car *ngFor="let car of cars" [car]="car"></app-car>
+  <ng-container *ngIf="loading; else elseTemplate">
+    <h2>Loading...</h2>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <app-car *ngFor="let car of cars" [car]="car"></app-car>
+  </ng-template>
+  
 </div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import AuthService from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition, query, stagger, group } from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterDialogComponent } from '../register/dialog/register-dialog/register-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +23,25 @@ import { trigger, state, style, animate, transition, query, stagger, group } fro
   ]
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService, 
+    private router: Router, 
+    private dialog: MatDialog
+  ) {}
+
+  ngOnInit() {
+    this.authService.handleUserAuthOnLogin();
+  };
 
   email: string;
   password: string;
+
+  openRegistrationDialog() {
+    debugger;
+    this.dialog.open(RegisterDialogComponent, {
+     width: '40%'
+   });
+  };
 
   doLogin = () => {
     this.authService.login(this.email, this.password)
@@ -32,19 +49,6 @@ export class LoginComponent implements OnInit {
         () => this.router.navigate(['home']),
         error => console.log(error)
       )
-  }
+  };
+};
 
-  doRegister = () => {
-    this.authService.saveNewUser();
-    this.authService.register(this.email, this.password)
-      .subscribe(
-        () => this.router.navigate(['home']),
-        error => console.log(error)
-      )
-  }
-
-  ngOnInit() {
-    this.authService.handleUserAuthOnLogin();
-  }
-
-}

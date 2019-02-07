@@ -1,50 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import Car from '../../../shared/interfaces/car.interface';
-import DataService from 'src/app/services/data.service';
 import { Observable } from 'rxjs';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
+import CarService from 'src/app/services/car.service';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-cars-list',
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.css']
 })
 export class CarsListComponent implements OnInit {
-  cars: Observable<Car[]>;
+  cars: any;
   loading: Boolean = true;
 
-  constructor(private dataService: DataService, private apollo: Apollo) { }
+  constructor(private carService: CarService) { }
 
   ngOnInit() {
-    this.apollo
-    .watchQuery({
-      query: query
-    })
-    .valueChanges
-    .subscribe((res: any) => {
-      this.cars = res.data.cars;
-      this.loading = res.data.loading;
-    })
+    this.cars = this.carService.getAllCars()
+      .subscribe((data: any) => {
+        this.cars = data.data.cars,
+        this.loading = data.loading;
+      });
   }
 
   wasSelected = (event: any) => console.log(event);
-
 }
-
-const query = gql`
-  query {
-    cars {
-      manufacturer
-      model
-      topSpeed
-      horsePower
-      torque
-      dateAdded
-      doors
-      yearFrom
-      yearTo
-      information
-      imageUrl
-    }
-  }
-`;

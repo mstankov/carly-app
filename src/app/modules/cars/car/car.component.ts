@@ -18,6 +18,6 @@ export class CarComponent {
       width: '30%',
       data: { car: this.car }
     });
-  }
+  };
+};
 
-}

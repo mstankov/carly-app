@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 @Injectable({
     providedIn: 'root'
 })
-export default class DataService {
+export default class UserService {
     private _database: firebase.database.Database;
     private _cars: Car[];
     private _carsSubject: BehaviorSubject<Car[]>;

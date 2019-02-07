@@ -8,7 +8,6 @@ import { CarComponent } from './car/car.component';
 import { MatCardModule } from '@angular/material/card';
 import { CarDialogComponent } from './car/car-dialog/car-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -19,8 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatCardModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    SharedModule,
-    MatButtonModule
+    SharedModule
   ],
   declarations: [
     CarsListComponent, 

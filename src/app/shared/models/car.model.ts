@@ -1,6 +1,4 @@
-import ICar from "../interfaces/car.interface";
-
-export default class Car implements ICar {
+export default class Car {
     constructor(
         public topSpeed: number,
         public manufacturer: string,
@@ -13,4 +11,4 @@ export default class Car implements ICar {
         public torque: number,
         public horsePower: number
     ){}
-}
+};

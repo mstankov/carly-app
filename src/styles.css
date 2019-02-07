@@ -11,8 +11,20 @@ ul, ol {
     list-style: none;
 }
 
+mat-dialog-container {
+    border-radius: 2em !important;
+}
+
 .label-primary {
     float: left;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.display-flex {
+    display: flex !important;
 }
 
 [appHighlight] {
@@ -20,3 +32,4 @@ ul, ol {
     transition-timing-function: linear;
     transition: 0.2s;
 }
+
