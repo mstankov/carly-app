@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   password: string;
 
   openRegistrationDialog() {
-    debugger;
     this.dialog.open(RegisterDialogComponent, {
      width: '40%'
    });

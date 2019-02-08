@@ -1,21 +1,22 @@
 <h2 class="text-center" mat-dialog-title>Registration</h2>
 <div mat-dialog-content>
-    <mat-horizontal-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="credentialsFormGroup">
+    <mat-vertical-stepper [linear]="false" #stepper>
+        <mat-step label="Credentials" [stepControl]="credentialsFormGroup" state="credentials" errorMessage="Please fill in the required fields.">
           <form [formGroup]="credentialsFormGroup">
-            <ng-template matStepLabel>Fill out your credentials</ng-template>
               <div class="display-flex flex-row">
                   <mat-form-field appearance="standard">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="email@domain.com" formControlName="email" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="email" required>
+                    <!-- <mat-icon matSuffix>email</mat-icon> -->
                     <mat-hint>Your email</mat-hint>
+                    <mat-error *ngIf="credentialsFormGroup.get('email').invalid">Enter a valid email address</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="standard">
                     <mat-label>Password</mat-label>
                     <input matInput type="password" placeholder="p4ssw0rd" formControlName="password" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-icon matSuffix>vpn_key</mat-icon> -->
                     <mat-hint>Your password</mat-hint>
+                    <mat-error *ngIf="credentialsFormGroup.get('password').invalid">Enter a valid password</mat-error>
                   </mat-form-field>
               </div>
             <div class="margin-top-small">
@@ -23,21 +24,23 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="nameFormGroup">
+
+        <mat-step label="Name" [stepControl]="nameFormGroup" state="name" errorMessage="Please fill in the required fields.">
           <form [formGroup]="nameFormGroup">
-              <ng-template matStepLabel>Fill out your name</ng-template>
               <div class="display-flex flex-row">
                   <mat-form-field appearance="standard">
                     <mat-label>First name</mat-label>
-                    <input matInput placeholder="John" formControlName="firstName" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="firstName" required>
+                    <!-- <mat-icon matSuffix>format_align_left</mat-icon> -->
                     <mat-hint>Your first name</mat-hint>
+                    <mat-error *ngIf="nameFormGroup.get('firstName').invalid">Enter a valid name</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="standard">
                     <mat-label>Last name</mat-label>
-                    <input matInput placeholder="Doe" formControlName="lastName" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="lastName" required>
+                    <!-- <mat-icon matSuffix>format_align_right</mat-icon> -->
                     <mat-hint>Your last name</mat-hint>
+                    <mat-error *ngIf="nameFormGroup.get('lastName').invalid">Enter a valid last name</mat-error>
                   </mat-form-field>
               </div>
             <div class="margin-top-small">
@@ -46,35 +49,52 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="addressFormGroup">
+
+        <mat-step label="Address" [stepControl]="addressFormGroup" state="address" errorMessage="Please fill in the required fields.">
           <form [formGroup]="addressFormGroup">
-              <ng-template matStepLabel>Fill out your address</ng-template>
               <div class="display-flex flex-row">
                   <mat-form-field appearance="standard">
                     <mat-label>City</mat-label>
-                    <input matInput placeholder="Sofia" formControlName="city" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="city" required>
+                    <!-- <mat-icon matSuffix>commute</mat-icon> -->
                     <mat-hint>Your city, e.g. Sofia</mat-hint>
+                    <mat-error *ngIf="addressFormGroup.get('city').invalid">Enter a valid email city name</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="standard">
                     <mat-label>Street</mat-label>
-                    <input matInput placeholder="Vitoshka" formControlName="street" required>
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="street" required>
+                    <!-- <mat-icon matSuffix>assignment</mat-icon> -->
                     <mat-hint>Your street, e.g. Vitosha Boulevard</mat-hint>
+                    <mat-error *ngIf="addressFormGroup.get('street').invalid">Enter a valid street name</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="standard">
                     <mat-label>Zipcode</mat-label>
-                    <input matInput placeholder="1220" formControlName="zipcode">
-                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <input matInput formControlName="zipcode">
+                    <!-- <mat-icon matSuffix>code</mat-icon> -->
                     <mat-hint>(Optional) Your region's zipcode, e.g. 1220</mat-hint>
                   </mat-form-field>
               </div>
             <div class="margin-top-small">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Reset</button>
-                <button class="float-right" mat-raised-button color="primary" (click)="register()">Register</button>
+                <button 
+                  [disabled]="!credentialsFormGroup.valid || !nameFormGroup.valid || !addressFormGroup.valid" 
+                  class="float-right" 
+                  mat-raised-button color="primary" 
+                  (click)="register({ credentialsForm: credentialsFormGroup, nameForm: nameFormGroup, addressForm: addressFormGroup})">Register</button>
             </div>
           </form>
         </mat-step>
-      </mat-horizontal-stepper>
+
+        <ng-template matStepperIcon="credentials">
+          <mat-icon>account_box</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="name">
+          <mat-icon>perm_identity</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="address">
+          <mat-icon>add_location</mat-icon>
+        </ng-template>
+
+      </mat-vertical-stepper>
 </div>

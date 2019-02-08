@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterDialogComponent } from './register/dialog/register-dialog/register-dialog.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @NgModule({
   imports: [
@@ -37,6 +38,12 @@ import { RegisterDialogComponent } from './register/dialog/register-dialog/regis
     MatInputModule,
     MatButtonModule,
     MatIconModule
+  ],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false, showError: true }
+    }
   ]
 })
 export class UserModule { }

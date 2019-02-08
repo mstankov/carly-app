@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import CarService from 'src/app/services/car.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cars-list',
