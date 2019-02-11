@@ -21,11 +21,12 @@ export default class UserService {
     }
 
     addUser = (input: any) => {
-        const { firstName, lastName, email, password, address } = input;
+        const { id, firstName, lastName, email, password, address } = input;
 
         return this.apollo.mutate({
             mutation: addUser,
             variables: { 
+                _id: id,
                 firstName: firstName, 
                 lastName: lastName, 
                 email: email,

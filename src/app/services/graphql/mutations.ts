@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 const addUser = gql`
      mutation addUser (
+        $id: ID!,
         $firstName: String!,
         $lastName: String!,
         $email: String!,
@@ -11,6 +12,7 @@ const addUser = gql`
         $zipcode: Int
     ) {
         addUser(input: {
+            id: $id
             firstName: $firstName
             lastName: $lastName
             email: $email

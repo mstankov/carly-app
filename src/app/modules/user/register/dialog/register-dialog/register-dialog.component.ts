@@ -53,27 +53,27 @@ export class RegisterDialogComponent implements OnInit {
     this.authService.saveNewUser();
     this.authService.register(email, password)
       .subscribe(
-        val => console.log(val),
+        val => {
+          const uid = val.user.uid;
+
+          if(val.additionalUserInfo.isNewUser) {
+            this.userService.addUser({
+              id: uid,
+              email: email,
+              password: password,
+              firstName: firstName,
+              lastName: lastName,
+              address: {
+                city: city,
+                street: street,
+                zipcode: zipcode
+              }
+            }).subscribe(user => console.log(user));
+          }
+          this.router.navigate(['home']);
+        },
+
         error => console.log(error)
       );
-    this.userService.addUser({
-      email: email,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      address: {
-        city: city,
-        street: street,
-        zipcode: zipcode
-      }
-    })
-      .subscribe(val => {
-        console.log(val);
-        this.router.navigate(['home'])
-          .then (
-            (res) => console.log('Succeeded logging in and navigating Home: ' + res),
-            (error) => console.log('Error navigating home after logging in: ' + error)
-          );
-      });
   };
 }
