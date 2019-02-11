@@ -6,7 +6,9 @@ import { getAllCars, getCar } from './graphql/queries';
     providedIn: 'root'
 })
 export default class CarService {
-    constructor(private apollo: Apollo) {}
+    constructor(private apollo: Apollo) {
+        this.getAllCars();
+    }
 
     getAllCars = () => this.apollo
             .watchQuery({
@@ -16,8 +18,10 @@ export default class CarService {
 
     getCar = (id: string) => this.apollo
             .watchQuery({
-                query: getCar(id)
+                query: getCar(),
+                variables: {
+                    id: id
+                }
             })
             .valueChanges
-    
 }

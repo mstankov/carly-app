@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import UserService from 'src/app/services/user.service';
+import AuthService from 'src/app/services/auth.service';
+import { Car } from 'src/app/types';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,19 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  userCars: any;
+  loading: boolean = true;
+  constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-  }
+    const uid: string = this.authService.user.getValue().uid;
 
-  startCounting = (target: any) => {
-    fromEvent(target, 'click')
-      .pipe(switchMap(event => interval(1000)))
-      .subscribe(value => console.log(value));
-  }
+    this.userCars = this.userService
+      .getUserCars(uid)
+      .subscribe((res: any) => {
+        this.loading = res.loading;
+        this.userCars = res.data.cars;
+      });
+  };
 
 }

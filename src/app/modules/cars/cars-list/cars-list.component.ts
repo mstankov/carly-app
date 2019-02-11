@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import CarService from 'src/app/services/car.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cars-list',
@@ -7,18 +8,15 @@ import CarService from 'src/app/services/car.service';
   styleUrls: ['./cars-list.component.css']
 })
 export class CarsListComponent implements OnInit {
-  cars: any;
-  loading: Boolean = true;
-
+  cars: any[];
+  loading: boolean = true;
   constructor(private carService: CarService) { }
 
   ngOnInit() {
-    this.cars = this.carService.getAllCars()
-      .subscribe((data: any) => {
-        this.cars = data.data.cars,
+    this.carService.getAllCars()
+      .subscribe((data: { loading: boolean, data: any }) => {
+        this.cars = data.data.cars;
         this.loading = data.loading;
       });
   }
-
-  wasSelected = (event: any) => console.log(event);
 }

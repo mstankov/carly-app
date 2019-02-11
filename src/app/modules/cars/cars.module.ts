@@ -28,6 +28,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   entryComponents: [
     CarDialogComponent
+  ],
+
+  exports: [
+    CarComponent
   ]
 })
 export class CarsModule { }

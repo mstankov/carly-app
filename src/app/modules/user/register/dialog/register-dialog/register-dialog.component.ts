@@ -50,13 +50,12 @@ export class RegisterDialogComponent implements OnInit {
     const { firstName, lastName } = nameForm.value;
     const { city, street, zipcode } = addressForm.value;
   
-    this.authService.saveNewUser();
     this.authService.register(email, password)
       .subscribe(
         val => {
           const uid = val.user.uid;
 
-          if(val.additionalUserInfo.isNewUser) {
+          if (val.additionalUserInfo.isNewUser) {
             this.userService.addUser({
               id: uid,
               email: email,

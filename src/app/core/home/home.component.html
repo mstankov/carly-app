@@ -1,3 +1,11 @@
 <h2>Welcome {{ username }}</h2>
 
-To view your cars, click <a (click)="startCounting($event.currentTarget)" style="color: white" class="btn btn-outline-primary btn-dark" role="button">here</a>
+<h3>Your favorite cars:</h3>
+<div class="card-deck">
+    <ng-container *ngIf="loading; else cars">
+        <h4>Loading...</h4>
+    </ng-container>
+    <ng-template #cars>
+        <app-car *ngFor="let car of userCars" [car]="car"></app-car>
+    </ng-template>
+</div>

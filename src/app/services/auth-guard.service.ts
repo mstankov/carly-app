@@ -10,7 +10,7 @@ export default class AuthGuard implements CanActivate {
     {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-        if (state.url !== '/login' && !this.authService.isAuthenticated()) {
+        if (state.url !== '/login' && !this.authService.user.getValue()) {
             this.authService.logout();
             return false;
         }

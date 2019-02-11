@@ -18,9 +18,9 @@ const getAllCars = gql`
   }
 `;
 
-const getCar = (id: string) => gql`
-  query {
-    car(id: ${id}) {
+const getCar = gql`
+  query car($id: String!) {
+    car(id: $id) {
       manufacturer
       model
       topSpeed
@@ -36,6 +36,27 @@ const getCar = (id: string) => gql`
   }
 `
 
+const getUserCars = gql`
+  query userCars($id: ID!) {
+    userCars(id: $id){
+      id
+      dateAdded
+      manufacturer
+      model
+      information
+      doors
+      torque
+      horsePower
+      topSpeed
+      yearTo
+      yearFrom
+      imageUrl
+    }
+  }
+`
+
 export {
-  getAllCars, getCar
+  getAllCars,
+  getCar,
+  getUserCars
 };

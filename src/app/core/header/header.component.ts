@@ -7,14 +7,13 @@ import AuthService from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private authService: AuthService) { }
 
   title = 'Carly';
   userInfo: any;
 
   ngOnInit() {
-    this.authService.userInfo.subscribe(user => this.userInfo = user);
+    this.authService.user.subscribe(user => this.userInfo = user);
   }
 
 }

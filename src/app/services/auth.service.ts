@@ -10,23 +10,7 @@ import { storeUserCredentials } from '../helpers/utils';
 export default class AuthService {
     constructor(private router: Router){}
 
-    userInfo: BehaviorSubject<any> = new BehaviorSubject(null);
-
-    getCurrentUserId = () => firebase.auth().currentUser.uid;
-    saveNewUser = () => firebase.database().ref('users/').set(this.getCurrentUserId());
-
-    login = (email: string, password: string) => {
-        return from(firebase.auth().signInWithEmailAndPassword(email, password))
-            .pipe(
-                map((result: any) => {
-                    storeUserCredentials({ email: email, password: password });
-
-                    this.userInfo.next(result.user);
-                    return result;
-                }),
-                catchError(error => of(error))
-            );
-    }
+    user: BehaviorSubject<any> = new BehaviorSubject(null);
 
     register = (email:string, password: string) => {
         return from(firebase.auth().createUserWithEmailAndPassword(email, password))
@@ -34,15 +18,28 @@ export default class AuthService {
                 map((result: any) => {
                     storeUserCredentials({ email: email, password: password });
 
-                    this.userInfo.next(result.user);
+                    this.user.next(result.user);
                     return result;
                 }),
                 catchError(error => of(error))
             )
     }
 
+    login = (email: string, password: string) => {
+        return from(firebase.auth().signInWithEmailAndPassword(email, password))
+            .pipe(
+                map((result: any) => {
+                    storeUserCredentials({ email: email, password: password });
+
+                    this.user.next(result.user);
+                    return result;
+                }),
+                catchError(error => of(error))
+            );
+    }
+
     logout = () => {
-        this.userInfo.next(null);
+        this.user.next(null);
         localStorage.removeItem('user_credentials');
 
         from(this.router.navigate(['/']))
@@ -50,8 +47,6 @@ export default class AuthService {
                 tap(val => val)
             );
     }
-
-    isAuthenticated = () => this.userInfo.getValue() !== null;
 
     handleUserAuthOnLogin = () => {
         const user : { email: string, password: string } = localStorage.getItem('user_credentials') !== null ? JSON.parse(localStorage.getItem('user_credentials')) : null;
