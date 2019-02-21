@@ -10,10 +10,10 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   title = 'Carly';
-  userInfo: any;
+  user: any;
 
   ngOnInit() {
-    this.authService.user.subscribe(user => this.userInfo = user);
+    this.authService.user$.subscribe(user => this.user = user);
   }
 
 }

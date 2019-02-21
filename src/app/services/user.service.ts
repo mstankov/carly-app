@@ -14,8 +14,12 @@ export default class UserService {
     public userCars$ = this._userCars.asObservable();
 
     constructor(private apollo: Apollo, private authService: AuthService) {
-        this.uid = this.authService.user.getValue() ? this.authService.user.getValue().uid : null;
-        this.getUserCars();
+        this.authService.user$.subscribe(user => {
+            if (user) {
+                this.uid = user.uid;
+                this.getUserCars();
+            };
+        });
     }
 
     addUser = (input: any) => {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { from, of, BehaviorSubject } from 'rxjs';
+import { from, of, BehaviorSubject, Observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { storeUserCredentials } from '../helpers/utils';
@@ -9,7 +9,8 @@ import { storeUserCredentials } from '../helpers/utils';
 export default class AuthService {
     constructor(private router: Router){}
 
-    user: BehaviorSubject<any> = new BehaviorSubject(null);
+    private user: BehaviorSubject<any> = new BehaviorSubject(null);
+    public user$: Observable<any> = this.user.asObservable();
 
     register = (email:string, password: string) => {
         return from(firebase.auth().createUserWithEmailAndPassword(email, password))

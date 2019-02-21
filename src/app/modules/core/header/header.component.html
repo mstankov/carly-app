@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div *ngIf="userInfo" class="collapse navbar-collapse" id="navbarsExample05">
+  <div *ngIf="user" class="collapse navbar-collapse" id="navbarsExample05">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
@@ -19,7 +19,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
-        <a class="nav-link">{{ userInfo.email }}</a>
+        <a class="nav-link">{{ user.email }}</a>
       </li>
 
       <li class="nav-item">

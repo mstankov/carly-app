@@ -11,7 +11,9 @@ export default class CarService {
 
     constructor(private apollo: Apollo, private authService: AuthService) {
         this.getAllCars();
-        this.uid = this.authService.user.getValue().uid;
+        this.authService.user$.subscribe(user => {
+            if (user) this.uid = user.uid;
+        });
     }
 
     getAllCars = () => this.apollo
