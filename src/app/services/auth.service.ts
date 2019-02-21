@@ -5,7 +5,6 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { storeUserCredentials } from '../helpers/utils';
 
-// TODO: Wire services with new Express API
 @Injectable()
 export default class AuthService {
     constructor(private router: Router){}

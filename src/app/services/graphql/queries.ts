@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 const getAllCars = gql`
   query {
     cars {
+      id
       manufacturer
       model
       topSpeed

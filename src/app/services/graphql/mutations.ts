@@ -9,7 +9,8 @@ const addUser = gql`
         $password: String!,
         $city: String!,
         $street: String!,
-        $zipcode: Int
+        $zipcode: Int,
+        $dob: Date
     ) {
         addUser(input: {
             id: $id
@@ -21,7 +22,8 @@ const addUser = gql`
                 city: $city
                 street: $street
                 zipcode: $zipcode
-            }
+            },
+            dob: $dob
         }) {
             id
             firstName
@@ -30,9 +32,29 @@ const addUser = gql`
                 street
                 city
                 zipcode
-            }
+            },
+            dob
         }
     }
 `;
 
-export { addUser };
+const updateUserCars = gql`
+    mutation updateUserCars($id: ID!, $carIds: [ID]!) {
+        updateUserCars(id: $id, carIds: $carIds) {
+            id
+            dateAdded
+            manufacturer
+            model
+            information
+            doors
+            torque
+            horsePower
+            topSpeed
+            yearTo
+            yearFrom
+            imageUrl
+        }
+    }
+`
+
+export { addUser, updateUserCars };

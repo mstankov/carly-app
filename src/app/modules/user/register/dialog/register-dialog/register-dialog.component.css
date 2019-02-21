@@ -4,5 +4,21 @@ mat-form-field {
 }
 
 .margin-top-small {
-    margin-top: 1em;
+    margin-top: 1rem;
+}
+
+.input-datepicker {
+    margin-top: 1rem;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 1rem;
+}
+
+.mat-form-field--no-underline .mat-input-underline {
+    background-color: transparent;
+}
+
+.red {
+    color: red;
 }

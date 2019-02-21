@@ -18,7 +18,6 @@
   </mat-card>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="getData()">LIKE</button>
-  <button mat-raised-button color="primary" (click)="saveData()">SHARE</button>
-  <button mat-button (click)="onNoClick()">NO THANKS</button>
+  <button mat-raised-button color="primary" (click)="addToFavourite(data.car.id)">FAVOURITE</button>
+  <button mat-button (click)="closeDialog()">NO THANKS</button>
 </div>

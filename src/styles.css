@@ -30,6 +30,10 @@ mat-dialog-container {
     display: flex !important;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
 [appHighlight] {
     box-shadow: 0 0 1px 1px #888888;
     transition-timing-function: linear;

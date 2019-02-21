@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UserComponent } from './user.component';
+import { LoginComponent } from './login/login.component'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RegisterDialogComponent } from './register/dialog/register-dialog/register-dialog.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatSnackBarModule } from "@angular/material";
 
 @NgModule({
   imports: [
@@ -21,12 +22,13 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSnackBarModule
   ],
   declarations: [
-    UserComponent,
-    LoginComponent, 
-    RegisterComponent,
+    LoginComponent,
     RegisterDialogComponent
   ],
   entryComponents: [
@@ -37,7 +39,10 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSnackBarModule
   ],
   providers: [
     {

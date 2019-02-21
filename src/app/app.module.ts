@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { CarsModule } from './modules/cars/cars.module';
 import { ProfileModule } from './modules/profile/profile.module';
@@ -16,6 +14,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { GraphQLModule } from './graphql.module';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { SharedModule } from './modules/shared/shared.module';
+import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
   declarations: [

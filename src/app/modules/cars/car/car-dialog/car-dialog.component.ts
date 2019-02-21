@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Car from 'src/app/shared/models/car.model';
 import AuthService from 'src/app/services/auth.service';
-
+import UserService from 'src/app/services/user.service';
 @Component({
   selector: 'app-car-dialog',
   templateUrl: './car-dialog.component.html',
@@ -12,11 +12,17 @@ export class CarDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { car: Car },
-    public authService: AuthService
+    public authService: AuthService,
+    public userService: UserService
   ) {}
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
     this.data.car = null;
+  }
+
+  addToFavourite(id: string) {
+    debugger;
+    this.userService.addToUserCars(id);
   }
 }

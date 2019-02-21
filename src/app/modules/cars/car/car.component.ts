@@ -15,7 +15,7 @@ export class CarComponent {
 
   openDialog(): void {
      this.dialog.open(CarDialogComponent, {
-      width: '40%',
+      width: '30%',
       data: { car: this.car }
     });
   };
